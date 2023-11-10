@@ -19,7 +19,7 @@ This native iOS app allows users to browse recipes using The Meal DB API. It inc
 
 ## App Demo
 
-![Demo Video](https://www.youtube.com/shorts/6YvEiOFGuS8)
+[Demo Video](https://www.youtube.com/shorts/6YvEiOFGuS8)
 
 ## Getting Started
 
