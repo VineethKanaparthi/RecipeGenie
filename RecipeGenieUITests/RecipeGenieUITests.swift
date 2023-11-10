@@ -38,4 +38,21 @@ final class RecipeGenieUITests: XCTestCase {
             }
         }
     }
+    
+    func testMealNavigation() throws {
+        // Given the app is launched
+        let app = XCUIApplication()
+        app.launch()
+
+        // When tapping the first meal in the list
+        let firstMealCell = app.tables.cells.firstMatch
+        if firstMealCell.waitForExistence(timeout: 5) {
+            firstMealCell.tap()
+            // Then the Meal Detail View should be displayed
+            XCTAssertTrue(app.otherElements["MealDetailView"].exists, "The Meal Detail View should be present.")
+        } else {
+            XCTFail("The first meal cell does not exist.")
+        }
+    }
+
 }

@@ -12,6 +12,7 @@ struct RecipeGenieApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .font(Font.custom(Constants.customFont, size: Constants.customFontSize))
         }
     }
 }

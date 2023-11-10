@@ -32,5 +32,21 @@ final class RecipeGenieTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testIngredientAndMeasureAccessors() throws {
+        // Given a meal with known ingredients and measures
+        let meal = Meal.sampleData.first!
+
+        // When accessing the ingredients and measures
+        let ingredient1 = meal.ingredient(for: 1)
+        let measure1 = meal.measure(for: 1)
+
+        // Then the correct values should be returned
+        XCTAssertEqual(ingredient1, "Milk", "The ingredient should be milk.")
+        XCTAssertEqual(measure1, "200ml", "The measure should be 200ml.")
+    }
+
+    
+    
 
 }
