@@ -7,7 +7,11 @@
 
 import SwiftUI
 
+/// A struct representing a meal with its details.
 struct Meal : Identifiable, Codable {
+    
+    // MARK: - Properties
+    
     let idMeal: String?
     let strMeal: String?
     let strDrinkAlternate: String?
@@ -62,6 +66,8 @@ struct Meal : Identifiable, Codable {
     let strCreativeCommonsConfirmed: String?
     let dateModified: Date?
     
+    // MARK: - Computed Properties
+    
     var id: String {
         return idMeal!
     }
@@ -84,10 +90,7 @@ struct Meal : Identifiable, Codable {
         ].compactMap { $0 }
     }
 
-}
-
-
-extension Meal {
+    // MARK: - Sample Data
     static let sampleData: [Meal] =
     [
         Meal(idMeal: "53049",
@@ -145,6 +148,9 @@ extension Meal {
              dateModified: nil)
     ]
     
+    // MARK: - Methods
+        
+    /// Get a dictionary of ingredients and their respective measures.
     func getIngredientsAndMeasures() -> [String: String] {
         var ingredientsAndMeasures = [String: String]()
         
@@ -159,6 +165,7 @@ extension Meal {
         return ingredientsAndMeasures
     }
     
+    /// Format the instructions text for better readability.
     func formatInstructions() -> [String] {
         guard let instructions = strInstructions, !instructions.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             return []

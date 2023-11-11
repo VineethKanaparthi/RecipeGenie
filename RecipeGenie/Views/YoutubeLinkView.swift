@@ -7,11 +7,14 @@
 
 import SwiftUI
 
+/// A view for displaying a link to a recipe video on YouTube.
 struct YouTubeLinkView: View {
+    /// youtube link associated with this view
     let youtubeLink: String?
     
     var body: some View {
         if let link = youtubeLink, !link.isEmpty {
+            // MARK: - Link to YouTube Video
             VStack {
                 Link("View Recipe Video", destination: URL(string: link)!)
                     .buttonStyle(LinkButtonStyle())

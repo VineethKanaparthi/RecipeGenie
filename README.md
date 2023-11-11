@@ -14,12 +14,13 @@ This native iOS app allows users to browse recipes using The Meal DB API. It inc
 - Has comprehensive error handling with retries to network calls
 - Handled nulls and empty values where ever required
 - Modularized code with seperated out views
-- Add documentation and comments
+- Added documentation and comments
+- Added togglable instructions and ingredients
 - Demo video will be in demo folder
 
 ## App Demo
 
-[Demo Video](https://www.youtube.com/shorts/6YvEiOFGuS8)
+[Demo Video](https://www.youtube.com/shorts/8On4ZCir6y8)
 
 ## Getting Started
 

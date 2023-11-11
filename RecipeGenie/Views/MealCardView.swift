@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+/// A view displaying a meal card with a title and an image.
 struct MealCardView: View {
+    /// meal associated with this view
     let meal: Meal
     
     var body: some View {
+        // MARK: - Title and Image
         VStack{
             TitleView(text: meal.strMeal ?? "", textStyle: UIFont.TextStyle.title3, color: Constants.titleColor)
                 .padding(.top, 5)

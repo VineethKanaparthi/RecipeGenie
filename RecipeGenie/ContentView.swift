@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+/// A SwiftUI view that displays a list of meals and allows users to search for dessert recipes.
 struct ContentView: View {
     @ObservedObject private var mealsViewModel = MealsViewModel()
     @State private var selectedMeal: Meal?
+    
+    // MARK: - Computed Properties
     
     var filteredMeals: [Meal] {
         if mealsViewModel.searchQuery.isEmpty {
@@ -25,6 +28,8 @@ struct ContentView: View {
             return filteredMeals
         }
     }
+    
+    // MARK: - Body
     
     var body: some View {
         NavigationView {
@@ -62,7 +67,7 @@ struct ContentView: View {
         }
     }
     
-    
+    // MARK: - Public Methods
     
     // Expose selectedMeal for testing purposes
     func getSelectedMeal() -> Meal? {

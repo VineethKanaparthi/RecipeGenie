@@ -19,6 +19,7 @@ struct TitleView: View {
     let color: Color
 
     var body: some View {
+        // MARK: - Title
         Text(text)
             .bold()
             .multilineTextAlignment(.center)
