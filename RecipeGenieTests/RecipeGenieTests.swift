@@ -38,8 +38,8 @@ final class RecipeGenieTests: XCTestCase {
         let meal = Meal.sampleData.first!
 
         // When accessing the ingredients and measures
-        let ingredient1 = meal.ingredient(for: 1)
-        let measure1 = meal.measure(for: 1)
+        let ingredient1 = meal.ingredients.first
+        let measure1 = meal.measurements.first
 
         // Then the correct values should be returned
         XCTAssertEqual(ingredient1, "Milk", "The ingredient should be milk.")

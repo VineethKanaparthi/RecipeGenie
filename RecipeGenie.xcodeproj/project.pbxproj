@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		256E18B52AFC478700DF6C62 /* ContentViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256E18B42AFC478700DF6C62 /* ContentViewTests.swift */; };
-		256E18B72AFC48C700DF6C62 /* ContentViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256E18B62AFC48C700DF6C62 /* ContentViewUITests.swift */; };
 		256E18B92AFD915A00DF6C62 /* IngredientsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256E18B82AFD915A00DF6C62 /* IngredientsListView.swift */; };
 		256E18BB2AFD93AB00DF6C62 /* DessertCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256E18BA2AFD93AB00DF6C62 /* DessertCardView.swift */; };
 		256E18BF2AFDA8BF00DF6C62 /* Comfortaa-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 256E18BE2AFDA8BF00DF6C62 /* Comfortaa-VariableFont_wght.ttf */; };
@@ -53,7 +52,6 @@
 
 /* Begin PBXFileReference section */
 		256E18B42AFC478700DF6C62 /* ContentViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewTests.swift; sourceTree = "<group>"; };
-		256E18B62AFC48C700DF6C62 /* ContentViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewUITests.swift; sourceTree = "<group>"; };
 		256E18B82AFD915A00DF6C62 /* IngredientsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsListView.swift; sourceTree = "<group>"; };
 		256E18BA2AFD93AB00DF6C62 /* DessertCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertCardView.swift; sourceTree = "<group>"; };
 		256E18BE2AFDA8BF00DF6C62 /* Comfortaa-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-VariableFont_wght.ttf"; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 			children = (
 				2599D2AA2AF9AF3F0056DC59 /* RecipeGenieUITests.swift */,
 				2599D2AC2AF9AF3F0056DC59 /* RecipeGenieUITestsLaunchTests.swift */,
-				256E18B62AFC48C700DF6C62 /* ContentViewUITests.swift */,
 			);
 			path = RecipeGenieUITests;
 			sourceTree = "<group>";
@@ -379,7 +376,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				256E18B72AFC48C700DF6C62 /* ContentViewUITests.swift in Sources */,
 				2599D2AB2AF9AF3F0056DC59 /* RecipeGenieUITests.swift in Sources */,
 				2599D2AD2AF9AF3F0056DC59 /* RecipeGenieUITestsLaunchTests.swift in Sources */,
 			);
