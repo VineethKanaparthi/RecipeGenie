@@ -17,7 +17,7 @@ struct MealCardView: View {
         VStack{
             TitleView(text: meal.strMeal ?? "", textStyle: UIFont.TextStyle.title3, color: Constants.titleColor)
                 .padding(.top, 5)
-            DessertCardView(url: meal.strMealThumb, imageHeight: 300)
+            DessertImageView(url: meal.strMealThumb, imageHeight: 300)
                 .padding(.bottom)
         }
         .overlay(
@@ -26,5 +26,8 @@ struct MealCardView: View {
         )
         .padding(.vertical, 5)
         .padding(.horizontal, 10)
+        // Accessibility label for the entire VStack
+        .accessibilityLabel(Text(meal.strMeal ?? "Meal"))
+        .accessibility(addTraits: .isButton)
     }
 }

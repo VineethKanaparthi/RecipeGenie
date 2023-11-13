@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A struct representing a meal with its details.
-struct Meal : Identifiable, Codable {
+struct Meal : Identifiable, Codable, Equatable {
     
     // MARK: - Properties
     

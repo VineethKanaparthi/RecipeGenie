@@ -17,7 +17,7 @@ struct TitleView: View {
     
     /// The preferred text color for the title.
     let color: Color
-
+    
     var body: some View {
         // MARK: - Title
         Text(text)
@@ -26,6 +26,6 @@ struct TitleView: View {
             .font(Font.custom(Constants.customFont, size: UIFont.preferredFont(forTextStyle: textStyle).pointSize))
             .foregroundColor(color)
             .padding(5)
-            .accessibilityLabel(text) 
+            .accessibilityLabel(text)
     }
 }

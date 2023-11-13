@@ -23,8 +23,6 @@ class ContentViewTests: XCTestCase {
 
     func testContentViewInitialization() {
         XCTAssertNotNil(contentView)
-        XCTAssertNil(contentView.getSelectedMeal())
-        XCTAssertEqual(contentView.getMeals().count, 0)
     }
 
     // Add more test cases for fetchMeals and other functionality

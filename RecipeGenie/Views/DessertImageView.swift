@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-/// A view for displaying a dessert card, including an image.
-struct DessertCardView: View {
+/// A view for displaying a the image of the dessert/meal.
+struct DessertImageView: View {
     /// The URL of the image.
     let url: String?
     
