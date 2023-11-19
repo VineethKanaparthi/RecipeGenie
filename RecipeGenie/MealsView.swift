@@ -10,7 +10,7 @@ import SwiftUI
 /// A SwiftUI view that displays a list of meals and allows users to search for dessert recipes.
 struct MealsView: View {
     
-    @StateObject private var mealsViewModel = MealsViewModel()
+    @ObservedObject var mealsViewModel: MealsViewModel
 
     // MARK: - Body
 
@@ -20,9 +20,7 @@ struct MealsView: View {
                 if mealsViewModel.isLoading {
                     ProgressView("Loading...")
                         .onAppear {
-                            if mealsViewModel.meals.isEmpty {
-                                mealsViewModel.fetchMeals()
-                            }
+                            mealsViewModel.fetchMeals()
                         }
                 } else if mealsViewModel.loadFailed {
                     failedToLoad
@@ -69,8 +67,27 @@ struct MealsView: View {
     
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // MARK: - Preview
 
 #Preview {
-    MealsView()
+    MealsView(mealsViewModel: MealsViewModel())
 }

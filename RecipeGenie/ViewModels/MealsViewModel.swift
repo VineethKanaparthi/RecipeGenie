@@ -11,7 +11,7 @@ import Combine
 class MealsViewModel: ObservableObject {
     
     /// The list of meals fetched from the API.
-    @Published var meals: [Meal] = []
+    private var meals: [Meal] = []
     
     /// Meals filtered by search query
     @Published var filteredMeals: [Meal] = []
