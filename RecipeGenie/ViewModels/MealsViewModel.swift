@@ -23,11 +23,7 @@ class MealsViewModel: ObservableObject {
     @Published var loadFailed = false
     
     /// The search query to filter meals.
-    @Published var searchQuery = "" {
-        didSet {
-            filterMeals()
-        }
-    }
+    @Published var searchQuery = ""
     
     // MARK: - Properties
     /// the number of retries to fetch meal details

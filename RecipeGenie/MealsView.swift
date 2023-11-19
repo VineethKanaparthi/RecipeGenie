@@ -19,6 +19,11 @@ struct MealsView: View {
             Group {
                 if mealsViewModel.isLoading {
                     ProgressView("Loading...")
+                        .onAppear {
+                            if mealsViewModel.meals.isEmpty {
+                                mealsViewModel.fetchMeals()
+                            }
+                        }
                 } else if mealsViewModel.loadFailed {
                     failedToLoad
                 } else {
@@ -28,11 +33,6 @@ struct MealsView: View {
             .navigationBarTitle("Dessert Recipes")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $mealsViewModel.searchQuery, prompt: "Search recipes")
-            .onAppear {
-                if mealsViewModel.meals.isEmpty {
-                    mealsViewModel.fetchMeals()
-                }
-            }
         }
     }
 
