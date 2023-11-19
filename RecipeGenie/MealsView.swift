@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A SwiftUI view that displays a list of meals and allows users to search for dessert recipes.
-struct ContentView: View {
+struct MealsView: View {
     
     @StateObject private var mealsViewModel = MealsViewModel()
 
@@ -68,5 +68,5 @@ struct ContentView: View {
 // MARK: - Preview
 
 #Preview {
-    ContentView()
+    MealsView()
 }
