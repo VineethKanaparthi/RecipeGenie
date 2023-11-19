@@ -13,12 +13,20 @@ struct YouTubeLinkView: View {
     let youtubeLink: String?
     
     var body: some View {
-        if let link = youtubeLink, !link.isEmpty {
+        if let link = youtubeLink, !link.isEmpty, let url = URL(string: link) {
             // MARK: - Link to YouTube Video
             VStack {
-                Link("View Recipe Video", destination: URL(string: link)!)
-                    .buttonStyle(LinkButtonStyle())
-                    .accessibilityLabel("View Recipe Video on YouTube")
+                Link(destination: url){
+                    HStack {
+                        Image(systemName: "play.rectangle.fill") // YouTube-like play icon
+                            .foregroundColor(.red)
+                        Text("View Recipe Video")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                    }
+                }
+                .buttonStyle(LinkButtonStyle())
+                .accessibilityLabel("View Recipe Video on YouTube")
             }
             .frame(maxWidth: .infinity, alignment: .center)
         }
