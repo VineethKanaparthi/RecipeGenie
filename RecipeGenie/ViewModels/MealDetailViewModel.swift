@@ -23,7 +23,7 @@ class MealDetailViewModel: ObservableObject {
     // MARK: - Properties
     
     /// The meal associated with this view.
-    let meal: Meal
+    private let meal: Meal
     
     /// the number of retries to fetch meal details
     private var retryCount = 3
