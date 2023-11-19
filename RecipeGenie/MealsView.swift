@@ -20,16 +20,7 @@ struct MealsView: View {
                 if mealsViewModel.isLoading {
                     ProgressView("Loading...")
                 } else if mealsViewModel.loadFailed {
-                    VStack {
-                        Text("Failed to Load Recipes, please try again later")
-                            .foregroundColor(Constants.titleColor)
-                            .padding()
-                        Button("Retry") {
-                            mealsViewModel.fetchMeals()
-                        }
-                        .padding()
-                        .accessibilityLabel("Retry Fetching Recipes")
-                    }
+                    failedToLoad
                 } else {
                     mealList
                 }
@@ -45,7 +36,20 @@ struct MealsView: View {
         }
     }
 
-    // MARK: - Meal List View
+    // MARK: - sub views
+    
+    private var failedToLoad: some View{
+        VStack {
+            Text("Failed to Load Recipes, please try again later")
+                .foregroundColor(Constants.titleColor)
+                .padding()
+            Button("Retry") {
+                mealsViewModel.fetchMeals()
+            }
+            .padding()
+            .accessibilityLabel("Retry Fetching Recipes")
+        }
+    }
 
     private var mealList: some View {
         ScrollView {

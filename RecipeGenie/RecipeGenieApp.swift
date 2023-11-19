@@ -11,7 +11,7 @@ import SwiftUI
 struct RecipeGenieApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MealsView()
                 .font(Font.custom(Constants.customFont, size: Constants.customFontSize))
         }
     }
