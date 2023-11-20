@@ -25,11 +25,8 @@ class MealsViewModel: ObservableObject {
     /// The search query to filter meals.
     @Published var searchQuery = ""
     
-    // MARK: - Properties
-    /// the number of retries to fetch meal details
-    private var retryCount = 3
+    /// A set to hold references to any cancellable operations so they are not deallocated prematurely.
     private var cancellables = Set<AnyCancellable>()
-    private let mealsURL = URL(string: "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert")
     
     // MARK: - Initializer
     init() {
@@ -58,35 +55,18 @@ class MealsViewModel: ObservableObject {
     /// Fetches meals from the API.
     // MARK: - API Call
     func fetchMeals() {
-        guard let url = mealsURL else {
-            self.loadFailed = true
-            return
-        }
-        
-        URLSession.shared.dataTaskPublisher(for: url)
-            .print("Network") // debug info
-            .tryMap { output -> Data in
-                guard let httpResponse = output.response as? HTTPURLResponse,
-                      httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                return output.data
-            }
-            .retry(retryCount)
-            .decode(type: MealResponse.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.isLoading = false
-                if case .failure = completion {
-                    self?.loadFailed = true
-                }
-            }, receiveValue: { [weak self] response in
-                self?.meals = response.meals.filter { meal in
+        RecipeService.shared.fetchMeals{ [weak self] result in
+            self?.isLoading = false
+            switch result {
+            case .success(let meals):
+                self?.meals = meals.filter { meal in
                     !(meal.idMeal?.isEmpty ?? true) && !(meal.strMeal?.isEmpty ?? true)
                 }
                 self?.filterMeals()
-            })
-            .store(in: &cancellables)
+            case .failure:
+                self?.loadFailed = true
+            }
+        }
     }
     
     func getFilteredMeals() -> [Meal]{

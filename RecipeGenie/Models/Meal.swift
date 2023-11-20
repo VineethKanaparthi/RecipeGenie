@@ -102,7 +102,6 @@ struct Meal : Identifiable, Codable, Equatable {
                 }
                 return IngredientQuantity(name: ingredient, measure: measure)
             }
-//        print(pairs)
         return pairs
     }
     
@@ -119,7 +118,6 @@ struct Meal : Identifiable, Codable, Equatable {
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .components(separatedBy: "\n")
             .filter { !$0.isEmpty }
-        //        print(trimmedInstructions)
         return trimmedInstructions
     }
     
