@@ -40,8 +40,8 @@ struct MealDetailView: View {
                         // MARK: - Content
                         DessertImageView(url: detailedMeal.strMealThumb, imageHeight: 300)
                         YouTubeLinkView(youtubeLink: detailedMeal.strYoutube)
-                        IngredientsListView(ingredientsAndMeasures: detailedMeal.getIngredientsAndMeasures())
-                        InstructionsView(instructionsTexts: detailedMeal.formatInstructions())
+                        IngredientsListView(ingredientsAndMeasures: detailedMeal.ingredientsAndMeasures)
+                        InstructionsView(instructionsTexts: detailedMeal.formattedInstructions)
                     }
                 }
             }

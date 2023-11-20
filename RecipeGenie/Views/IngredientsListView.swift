@@ -10,7 +10,7 @@ import SwiftUI
 /// A view for displaying the list of ingredients for a meal.
 struct IngredientsListView: View {
     /// Dictionary of ingredients and their corresponding measurements
-    let ingredientsAndMeasures: [String: String]?
+    let ingredientsAndMeasures: [IngredientQuantity]
     
     @State private var showIngredients = true
     
@@ -36,24 +36,24 @@ struct IngredientsListView: View {
             .accessibility(addTraits: .isHeader)
             
             Divider()
-            if let ingredientsAndMeasures = ingredientsAndMeasures, !ingredientsAndMeasures.isEmpty {
-                // MARK: - Ingredients List
+            // MARK: - Ingredients List
+            if !ingredientsAndMeasures.isEmpty {
                 if showIngredients {
                     VStack{
-                        ForEach(ingredientsAndMeasures.sorted(by: { $0.key < $1.key }), id: \.key) { ingredient, measure in
+                        ForEach(ingredientsAndMeasures, id: \.id) { ingredient in
                             HStack {
-                                Text("\(ingredient):")
+                                Text("\(ingredient.name):")
                                     .frame(alignment: .leading)
                                     .font(Font.custom(Constants.customFont, size: UIFont.preferredFont(forTextStyle: .body).pointSize))
                                     .foregroundColor(Constants.textColor)
-                                    .accessibilityLabel("Ingredient: \(ingredient)")
+                                    .accessibilityLabel("Ingredient: \(ingredient.name)")
                                 
                                 Spacer()
                                 
-                                Text(measure)
+                                Text(ingredient.measure)
                                     .font(Font.custom(Constants.customFont, size: UIFont.preferredFont(forTextStyle: .body).pointSize))
                                     .foregroundColor(Constants.textColor)
-                                    .accessibilityLabel("Measurement: \(measure)")
+                                    .accessibilityLabel("Measurement: \(ingredient.measure)")
                             }
                         }
                     }
