@@ -13,7 +13,7 @@ class ContentViewTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        contentView = MealsView()
+        contentView = MealsView(mealsViewModel: MealsViewModel())
     }
 
     override func tearDown() {
