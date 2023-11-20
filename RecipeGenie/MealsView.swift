@@ -57,7 +57,7 @@ struct MealsView: View {
                     .padding()
             } else {
                 ForEach(mealsViewModel.filteredMeals) { meal in
-                    NavigationLink(destination: MealDetailView(meal: meal)) {
+                    NavigationLink(destination: MealDetailView(mealId: meal.id)) {
                         MealCardView(meal: meal)
                     }
                 }

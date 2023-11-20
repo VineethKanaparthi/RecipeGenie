@@ -13,18 +13,16 @@ struct MealDetailView: View {
     // MARK: - Properties
     @StateObject var viewModel: MealDetailViewModel
     
-    init(meal: Meal) {
-        _viewModel = StateObject(wrappedValue: MealDetailViewModel(meal: meal))
+    // MARK: -Initializer
+    init(mealId: String) {
+        _viewModel = StateObject(wrappedValue: MealDetailViewModel(mealId: mealId))
     }
     
     // MARK: - Body
     var body: some View {
         ScrollView {
             if viewModel.isLoading {
-                ProgressView("Loading...")
-                    .onAppear {
-                        viewModel.fetchMeal()
-                    }
+                ProgressView("Loading...").onAppear{ viewModel.fetchMeal() }
             } else if viewModel.loadFailed {
                 Text("Failed to Load Recipe, please try again after some time")
                     .foregroundColor(Color.red)
@@ -32,16 +30,13 @@ struct MealDetailView: View {
             } else {
                 // Render the meal details
                 VStack(alignment: .leading) {
-                    if let detailedMeal = viewModel.meals.first, let _ = detailedMeal.strMeal {
-                        // MARK: - Title
-                        TitleView(text: detailedMeal.strMeal ?? "", textStyle: .title2, color: Constants.titleColor)
+                    if let meal = viewModel.meals.first, let dessertName = meal.strMeal {
+                        TitleView(text: dessertName, textStyle: .title2, color: Constants.titleColor)
                         Divider()
-                        
-                        // MARK: - Content
-                        DessertImageView(url: detailedMeal.strMealThumb, imageHeight: 300)
-                        YouTubeLinkView(youtubeLink: detailedMeal.strYoutube)
-                        IngredientsListView(ingredientsAndMeasures: detailedMeal.ingredientsAndMeasures)
-                        InstructionsView(instructionsTexts: detailedMeal.formattedInstructions)
+                        DessertImageView(url: meal.strMealThumb, imageHeight: 300)
+                        YouTubeLinkView(youtubeLink: meal.strYoutube)
+                        IngredientsListView(ingredientsAndMeasures: meal.ingredientsAndMeasures)
+                        InstructionsView(instructionsTexts: meal.formattedInstructions)
                     }
                 }
             }
