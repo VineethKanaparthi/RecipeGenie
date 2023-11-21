@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct RecipeGenieApp: App {
+    @StateObject var mealsViewModel = MealsViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MealsView(mealsViewModel: mealsViewModel)
                 .font(Font.custom(Constants.customFont, size: Constants.customFontSize))
         }
     }

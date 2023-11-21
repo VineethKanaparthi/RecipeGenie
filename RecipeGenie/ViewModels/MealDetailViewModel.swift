@@ -23,47 +23,28 @@ class MealDetailViewModel: ObservableObject {
     // MARK: - Properties
     
     /// The meal associated with this view.
-    let meal: Meal
+    private let mealId: String
     
     /// the number of retries to fetch meal details
     private var retryCount = 3
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initializer
-    init(meal: Meal) {
-        self.meal = meal
+    init(mealId: String) {
+        self.mealId = mealId
     }
     
     // MARK: - API Call
-    func fetchMeal() {
-        guard let url = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=\(meal.id)") else {
-            self.loadFailed = true
-            self.isLoading = false
-            return
-        }
-        
-        URLSession.shared.dataTaskPublisher(for: url)
-            .print("Network") // debug info
-            .tryMap { element -> Data in
-                guard let httpResponse = element.response as? HTTPURLResponse,
-                      httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                return element.data
+    func fetchMeal(){
+        RecipeService.shared.fetchMealDetail(for: mealId){ [weak self] result in
+            self?.isLoading = false
+            switch result {
+            case .success(let meals):
+                self?.meals = meals
+            case .failure:
+                self?.loadFailed = true
             }
-            .retry(retryCount)
-            .decode(type: MealResponse.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                self.isLoading = false
-                if case .failure = completion {
-                    self.loadFailed = true
-                }
-            }, receiveValue: { response in
-                self.meals = response.meals
-                self.isLoading = false
-            })
-            .store(in: &cancellables)
+        }
     }
     
 }

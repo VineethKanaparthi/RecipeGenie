@@ -5,7 +5,7 @@
 //  Created by Vineeth Kanaparthi on 11/6/23.
 //
 
-import SwiftUI
+import Foundation
 
 /// A struct representing a meal with its details.
 struct Meal : Identifiable, Codable, Equatable {
@@ -71,25 +71,56 @@ struct Meal : Identifiable, Codable, Equatable {
     var id: String {
         return idMeal!
     }
-
-    var ingredients: [String] {
+    
+    private var ingredients: [String?] {
         return [
             strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5,
             strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10,
             strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15,
             strIngredient16, strIngredient17, strIngredient18, strIngredient19, strIngredient20,
-        ].compactMap { $0 }
+        ]
     }
-
-    var measurements: [String] {
+    
+    private var measurements: [String?] {
         return [
             strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5,
             strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10,
             strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15,
             strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20,
-        ].compactMap { $0 }
+        ]
     }
-
+    
+    /// A dictionary of ingredients and their respective measures.
+    var ingredientsAndMeasures: [IngredientQuantity] {
+        let pairs = zip(ingredients, measurements)
+            .compactMap { ingredient, measure -> IngredientQuantity? in
+                guard let ingredient = ingredient?.trimmingCharacters(in: .whitespacesAndNewlines),
+                      let measure = measure?.trimmingCharacters(in: .whitespacesAndNewlines),
+                      !ingredient.isEmpty,
+                      !measure.isEmpty else {
+                    return nil
+                }
+                return IngredientQuantity(name: ingredient, measure: measure)
+            }
+        return pairs
+    }
+    
+    
+    /// Format the instructions text for better readability.
+    var formattedInstructions: [String] {
+        guard let instructions = strInstructions, !instructions.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return []
+        }
+        
+        let trimmedInstructions = instructions.replacingOccurrences(of: ".\r\n", with: ". ")
+            .replacingOccurrences(of: ". ", with: ".\n")
+            .replacingOccurrences(of: "\r", with: "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .components(separatedBy: "\n")
+            .filter { !$0.isEmpty }
+        return trimmedInstructions
+    }
+    
     // MARK: - Sample Data
     static let sampleData: [Meal] =
     [
@@ -147,39 +178,11 @@ struct Meal : Identifiable, Codable, Equatable {
              strCreativeCommonsConfirmed: nil,
              dateModified: nil)
     ]
-    
-    // MARK: - Methods
-        
-    /// Get a dictionary of ingredients and their respective measures.
-    func getIngredientsAndMeasures() -> [String: String] {
-        var ingredientsAndMeasures = [String: String]()
-        
-        for index in 0..<ingredients.count {
-            let ingredient = ingredients[index]
-            let measure = index < measurements.count ? measurements[index] : ""
-            
-            if !ingredient.isEmpty && !measure.isEmpty {
-                ingredientsAndMeasures[ingredient] = measure
-            }
-        }
-        return ingredientsAndMeasures
-    }
-    
-    /// Format the instructions text for better readability.
-    func formatInstructions() -> [String] {
-        guard let instructions = strInstructions, !instructions.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            return []
-        }
+}
 
-        let formattedInstructions = instructions.replacingOccurrences(of: ".\r\n", with: ". ")
-            .replacingOccurrences(of: ". ", with: ".\n")
-            .replacingOccurrences(of: "\r", with: "")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .components(separatedBy: "\n")
-            .filter { !$0.isEmpty }
-        print(formattedInstructions)
-        return formattedInstructions
-    }
-
+struct IngredientQuantity: Identifiable {
+    let id = UUID()
+    var name: String
+    var measure: String
 }
 

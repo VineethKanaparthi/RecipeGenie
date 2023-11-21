@@ -9,11 +9,11 @@ import XCTest
 @testable import RecipeGenie
 
 class ContentViewTests: XCTestCase {
-    var contentView: ContentView!
+    var contentView: MealsView!
 
     override func setUp() {
         super.setUp()
-        contentView = ContentView()
+        contentView = MealsView(mealsViewModel: MealsViewModel())
     }
 
     override func tearDown() {

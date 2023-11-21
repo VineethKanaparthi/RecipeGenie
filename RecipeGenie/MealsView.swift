@@ -8,9 +8,9 @@
 import SwiftUI
 
 /// A SwiftUI view that displays a list of meals and allows users to search for dessert recipes.
-struct ContentView: View {
+struct MealsView: View {
     
-    @StateObject private var mealsViewModel = MealsViewModel()
+    @ObservedObject var mealsViewModel: MealsViewModel
 
     // MARK: - Body
 
@@ -19,17 +19,11 @@ struct ContentView: View {
             Group {
                 if mealsViewModel.isLoading {
                     ProgressView("Loading...")
-                } else if mealsViewModel.loadFailed {
-                    VStack {
-                        Text("Failed to Load Recipes, please try again later")
-                            .foregroundColor(Constants.titleColor)
-                            .padding()
-                        Button("Retry") {
+                        .onAppear {
                             mealsViewModel.fetchMeals()
                         }
-                        .padding()
-                        .accessibilityLabel("Retry Fetching Recipes")
-                    }
+                } else if mealsViewModel.loadFailed {
+                    failedToLoad
                 } else {
                     mealList
                 }
@@ -37,15 +31,23 @@ struct ContentView: View {
             .navigationBarTitle("Dessert Recipes")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $mealsViewModel.searchQuery, prompt: "Search recipes")
-            .onAppear {
-                if mealsViewModel.meals.isEmpty {
-                    mealsViewModel.fetchMeals()
-                }
-            }
         }
     }
 
-    // MARK: - Meal List View
+    // MARK: - sub views
+    
+    private var failedToLoad: some View{
+        VStack {
+            Text("Failed to Load Recipes, please try again later")
+                .foregroundColor(Constants.titleColor)
+                .padding()
+            Button("Retry") {
+                mealsViewModel.fetchMeals()
+            }
+            .padding()
+            .accessibilityLabel("Retry Fetching Recipes")
+        }
+    }
 
     private var mealList: some View {
         ScrollView {
@@ -55,7 +57,7 @@ struct ContentView: View {
                     .padding()
             } else {
                 ForEach(mealsViewModel.filteredMeals) { meal in
-                    NavigationLink(destination: MealDetailView(meal: meal)) {
+                    NavigationLink(destination: MealDetailView(mealId: meal.id)) {
                         MealCardView(meal: meal)
                     }
                 }
@@ -65,8 +67,27 @@ struct ContentView: View {
     
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // MARK: - Preview
 
 #Preview {
-    ContentView()
+    MealsView(mealsViewModel: MealsViewModel())
 }

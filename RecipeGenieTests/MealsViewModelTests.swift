@@ -14,7 +14,6 @@ class MealsViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         viewModel = MealsViewModel()
-        viewModel.meals = Meal.sampleData
     }
     
     override func tearDownWithError() throws {
